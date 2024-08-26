@@ -1,18 +1,42 @@
+/* src/App.css */
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #282c34;
+  padding: 20px; /* Padding around the content */
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  gap: 20px; /* Space between cards */
+  max-width: 1200px; /* Adjust based on your design */
+  margin: 0 auto; /* Center the grid horizontally */
+  padding: 20px; /* Padding around the grid */
+  box-sizing: border-box; /* Ensure padding is included in the total width */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Responsive design for medium screens */
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Two cards per row on medium screens */
   }
 }
 
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* One card per row on small screens */
+  }
+}
+
+/* Header Styles */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,10 +48,12 @@
   color: white;
 }
 
+/* Link Styles */
 .App-link {
   color: #61dafb;
 }
 
+/* Logo Animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

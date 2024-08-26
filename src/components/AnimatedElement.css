@@ -1,0 +1,21 @@
+/* src/components/AnimatedElement.css */
+.element-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #20232a;
+}
+
+.animated-element {
+  font-size: 120px;
+  color: #61dafb;
+  font-weight: bold;
+  transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.animated-element:hover {
+  transform: rotate(360deg) scale(1.2);
+  color: #ff6347;
+}
