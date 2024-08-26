@@ -125,7 +125,7 @@ const AnimatedCard = ({ color }) => {
 </head>
 <body>
     ${htmlCode}
-    <script>${jsCode}<\/script>
+    <script>${jsCode}<script>
 </body>
 </html>
     `;
@@ -138,7 +138,7 @@ const AnimatedCard = ({ color }) => {
     <div className="animated-card">
       <div className="animation-container">
         <iframe
-          srcDoc={`<style>${cssCode}</style><div class="matrix"></div><div class="hacker-theme"></div><script>${jsCode}<\/script>`}
+          srcDoc={`<style>${cssCode}</style><div class="matrix"></div><div class="hacker-theme"></div><script>${jsCode}<script>`}
           title="Live Animation"
           className="animation-frame"
         ></iframe>
