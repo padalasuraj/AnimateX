@@ -1,59 +1,103 @@
-/* src/components/NavHeader.css */
-
 .nav-header {
-  width: 18rem; /* Adjust width as needed */
-  background-color: white;
-  padding: 1.25rem;
-  box-shadow: 0 4px 6px rgba(138, 43, 226, 0.5); /* Shadow color based on Tailwind's shadow-purple-200/50 */
-  border-radius: 0.375rem; /* Tailwind's rounded-md */
+  background: linear-gradient(
+    90deg,
+    rgba(36, 37, 42, 1) 0%,
+    rgba(17, 18, 19, 1) 100%
+  );
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
 }
 
-.nav-menu {
+.nav-container {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.nav-item {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  white-space: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
 }
 
-.nav-button {
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00dbde;
+  text-shadow: 0px 0px 15px rgba(0, 219, 222, 0.7);
+}
+
+.nav-links {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #00dbde;
+  top: 0;
+  left: -100%;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.nav-links a:hover::before {
+  left: 0;
+}
+
+.nav-links a:hover {
+  color: #20232a;
+  z-index: 2;
+}
+
+.notes-button {
+  background-color: #00dbde;
+  color: #20232a;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
   font-weight: 600;
-  border-radius: 9999px; /* Full rounded button */
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #f5f5f5
-  ); /* Background cover effect */
-  color: #4a4a4a; /* Default text color */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0px 0px 15px rgba(0, 219, 222, 0.7);
 }
 
-.nav-button:hover {
-  background-color: #f3e8ff; /* Hover background color */
-  box-shadow: inset 0 0 10px rgba(138, 43, 226, 0.5); /* Inner shadow effect */
+.notes-button::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  top: 0;
+  left: -100%;
+  z-index: 1;
+  transition: all 0.4s ease;
 }
 
-.nav-button:focus {
-  background: linear-gradient(
-    to right,
-    #9b59b6,
-    #8e44ad
-  ); /* Focus background gradient */
-  color: white; /* Focus text color */
+.notes-button:hover::before {
+  left: 0;
 }
 
-.nav-icon {
-  width: 1.5rem; /* Icon size */
-  height: 1.5rem;
+.notes-button:hover {
+  color: #00dbde;
+  background-color: #ffffff;
+  z-index: 2;
 }
