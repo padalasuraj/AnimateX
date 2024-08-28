@@ -1,209 +1,157 @@
 import React, { useState } from "react";
 import "./AnimatedCard.css";
 
-// Define animation variations
-const animations = [
-  {
-    name: "matrix",
-    cssCode: (color) => `
-      body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        height: 100%;
-        background: #000;
-        font-family: 'Courier New', Courier, monospace;
-        color: ${color};
-      }
-
-      .matrix {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: 1;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .matrix div {
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 255, 0, 0.8), transparent);
-        animation: drop 5s linear infinite;
-        box-shadow: 0px 0px 8px rgba(0, 255, 0, 0.7);
-      }
-
-      @keyframes drop {
-        0% {
-          transform: translateY(-100%);
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      }
-
-      h1 {
-        color: #fff;
-        font-size: 3em;
-        text-shadow: 0 0 15px ${color}, 0 0 30px ${color}, 0 0 45px ${color};
-        animation: pulse 1.5s infinite alternate;
-      }
-
-      @keyframes pulse {
-        from {
-          text-shadow: 0 0 15px ${color}, 0 0 30px ${color}, 0 0 45px ${color};
-        }
-        to {
-          text-shadow: 0 0 25px ${color}, 0 0 50px ${color}, 0 0 70px ${color};
-        }
-      }
-    `,
-    jsCode: `
-      function createMatrixEffect() {
-        const matrixContainer = document.querySelector('.matrix');
-        const columns = Math.floor(window.innerWidth / 20);
-        for (let i = 0; i < columns; i++) {
-          const column = document.createElement('div');
-          let matrixText = '';
-          for (let j = 0; j < 150; j++) {
-            matrixText += String.fromCharCode(0x30A0 + Math.random() * 96);
-          }
-          column.innerHTML = \`<span>\${matrixText}</span>\`;
-          column.style.animationDuration = \`\${3 + Math.random() * 3}s\`;
-          column.style.animationDelay = \`\${Math.random() * 1.5}s\`;
-          matrixContainer.appendChild(column);
-        }
-      }
-
-      createMatrixEffect();
-      window.addEventListener('resize', () => {
-        document.querySelector('.matrix').innerHTML = '';
-        createMatrixEffect();
-      });
-    `,
-  },
-  {
-    name: "flying-squares",
-    cssCode: (color) => `
-      body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        height: 100%;
-        background: #000;
-      }
-
-      .square {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        background-color: ${color};
-        animation: fly 5s infinite;
-      }
-
-      @keyframes fly {
-        0% {
-          transform: translateX(0) translateY(0);
-          opacity: 1;
-        }
-        100% {
-          transform: translateX(300px) translateY(300px);
-          opacity: 0;
-        }
-      }
-    `,
-    jsCode: `
-      function createSquares() {
-        const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
-        const numSquares = 20;
-        for (let i = 0; i < numSquares; i++) {
-          const square = document.createElement('div');
-          square.className = 'square';
-          square.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-          square.style.top = Math.random() * 100 + '%';
-          square.style.left = Math.random() * 100 + '%';
-          document.body.appendChild(square);
-        }
-      }
-
-      createSquares();
-    `,
-  },
-  {
-    name: "spinning-circles",
-    cssCode: (color) => `
-      body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        height: 100%;
-        background: #000;
-      }
-
-      .circle {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid ${color};
-        animation: spin 4s infinite linear;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: rotate(360deg);
-          opacity: 0;
-        }
-      }
-    `,
-    jsCode: `
-      function createCircles() {
-        const numCircles = 15;
-        for (let i = 0; i < numCircles; i++) {
-          const circle = document.createElement('div');
-          circle.className = 'circle';
-          circle.style.top = Math.random() * 100 + '%';
-          circle.style.left = Math.random() * 100 + '%';
-          document.body.appendChild(circle);
-        }
-      }
-
-      createCircles();
-    `,
-  },
+const colors = [
+  "#FF5733",
+  "#33FF57",
+  "#3357FF",
+  "#F3FF33",
+  "#FF33A8",
+  "#33FFF7", // Add more unique colors
+  // ...up to 90 colors
 ];
 
-const AnimatedCard = ({ color }) => {
+const animations = colors.reduce((acc, color, index) => {
+  const animationName = `animation${index + 1}`;
+  acc[animationName] = {
+    css: `
+      body {
+        background-color: #000;
+        color: #0f0;
+        font-family: 'Courier New', Courier, monospace;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      .card {
+        width: 500px;
+        height: 600px;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+        border: 2px solid ${color};
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      }
+      .code-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: ${color};
+        white-space: nowrap;
+        animation: code-fall 1s linear infinite;
+      }
+      @keyframes code-fall {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-100%); }
+      }
+      .code-content-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .code-content-wrapper .code-content {
+        flex-shrink: 0;
+      }
+      .card p {
+        margin: 0;
+        padding: 5px 10px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    `,
+    html: `
+      <div class="container">
+        <div class="card code-card">
+          <div class="code-content-wrapper">
+            <div class="code-content">
+              <p>const apiUrl = 'https://api.example.com';</p>
+              <p>fetch(apiUrl)</p>
+              <p>  .then(response =&gt; response.json())</p>
+              <p>  .then(data =&gt; {</p>
+              <p>    console.log(data);</p>
+              <p>    let user = data.user;</p>
+              <p>    if (user.active) {</p>
+              <p>      console.log('User is active');</p>
+              <p>    } else {</p>
+              <p>      console.log('User is inactive');</p>
+              <p>    }</p>
+              <p>  })</p>
+              <p>  .catch(error =&gt; console.error('Error:', error));</p>
+              <p></p>
+              <p>let i = 0;</p>
+              <p>while (i &lt; 10) {</p>
+              <p>  console.log('Iteration', i);</p>
+              <p>  i++;</p>
+              <p>}</p>
+              <p></p>
+              <p>function log(message) {</p>
+              <p>  console.log(message);</p>
+              <p>}</p>
+              <p>log('Script started');</p>
+              <p>log('Processing data');</p>
+              <p>log('Script ended');</p>
+              <!-- Repeat text for continuous effect -->
+              <p>const apiUrl = 'https://api.example.com';</p>
+              <p>fetch(apiUrl)</p>
+              <p>  .then(response =&gt; response.json())</p>
+              <p>  .then(data =&gt; {</p>
+              <p>    console.log(data);</p>
+              <p>    let user = data.user;</p>
+              <p>    if (user.active) {</p>
+              <p>      console.log('User is active');</p>
+              <p>    } else {</p>
+              <p>      console.log('User is inactive');</p>
+              <p>    }</p>
+              <p>  })</p>
+              <p>  .catch(error =&gt; console.error('Error:', error));</p>
+              <p></p>
+              <p>let i = 0;</p>
+              <p>while (i &lt; 10) {</p>
+              <p>  console.log('Iteration', i);</p>
+              <p>  i++;</p>
+              <p>}</p>
+              <p></p>
+              <p>function log(message) {</p>
+              <p>  console.log(message);</p>
+              <p>}</p>
+              <p>log('Script started');</p>
+              <p>log('Processing data');</p>
+              <p>log('Script ended');</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+  };
+  return acc;
+}, {});
+
+const AnimatedCard = ({ animation = "animation1" }) => {
   const [isCopied, setIsCopied] = useState(false);
 
-  // Randomly select an animation
-  const animation = animations[Math.floor(Math.random() * animations.length)];
-
   const handleCopy = () => {
-    const htmlCode = `<div class="${animation.name}"></div>`;
-
+    const selectedAnimation = animations[animation] || animations.animation1;
     const fullCode = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${animation.name} Animation</title>
-    <style>${animation.cssCode(color)}</style>
+    <title>Hacker Theme Animation</title>
+    <style>${selectedAnimation.css}</style>
 </head>
 <body>
-    ${htmlCode}
-    <script>${animation.jsCode}</script>
+    ${selectedAnimation.html}
 </body>
 </html>
     `;
@@ -212,13 +160,13 @@ const AnimatedCard = ({ color }) => {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const selectedAnimation = animations[animation] || animations.animation1;
+
   return (
     <div className="animated-card">
       <div className="animation-container">
         <iframe
-          srcDoc={`<style>${animation.cssCode(color)}</style><div class="${
-            animation.name
-          }"></div><script>${animation.jsCode}</script>`}
+          srcDoc={`<style>${selectedAnimation.css}</style>${selectedAnimation.html}`}
           title="Live Animation"
           className="animation-frame"
           sandbox="allow-scripts"

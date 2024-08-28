@@ -24,7 +24,7 @@
   background: radial-gradient(
     circle,
     rgba(0, 255, 0, 0.2) 0%,
-    /* More subtle green gradient */ rgba(0, 255, 0, 0) 60%
+    rgba(0, 255, 0, 0) 60%
   );
   z-index: -1;
   transition: opacity 0.3s ease-in-out;

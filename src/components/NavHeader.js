@@ -17,7 +17,7 @@ const NavHeader = () => {
         </nav>
 
         <a href="https://padalasuraj.netlify.app/" className="author-button">
-          Developer
+          Developer Profile
         </a>
       </div>
     </header>

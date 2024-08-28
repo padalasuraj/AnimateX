@@ -3,28 +3,20 @@ import "./App.css";
 import AnimatedCard from "./components/AnimatedCard";
 import NavHeader from "./components/NavHeader";
 
-function App() {
-  const cardColors = [
-    "#FF0000",
-    "#00FF00",
-    "#0000FF",
-    "#FFFF00",
-    "#FF00FF",
-    "#00FFFF",
-  ];
+const animations = ["animation1", "animation2", "animation3", "animation4"];
 
-  // Generate 90 cards
-  const cards = Array.from({ length: 90 }, (_, index) => ({
-    color: cardColors[index % cardColors.length],
-  }));
+function App() {
+  const numberOfCards = 90; // 90 cards on the dashboard
 
   return (
     <div className="App">
       <NavHeader />
       <div className="cards-container">
-        {cards.map((card, index) => (
+        {Array.from({ length: numberOfCards }).map((_, index) => (
           <div key={index} className="card-wrapper">
-            <AnimatedCard color={card.color} />
+            <AnimatedCard
+              animation={animations[index % animations.length]} // Loop through different animations
+            />
           </div>
         ))}
       </div>

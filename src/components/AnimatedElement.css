@@ -1,21 +1,129 @@
-/* src/components/AnimatedElement.css */
-.element-container {
+body {
+  background-color: #000;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #20232a;
+  overflow: hidden; /* Hide body overflow to prevent scroll bars */
 }
 
-.animated-element {
-  font-size: 120px;
-  color: #61dafb;
-  font-weight: bold;
-  transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
-  cursor: pointer;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.animated-element:hover {
-  transform: rotate(360deg) scale(1.2);
-  color: #ff6347;
+.card {
+  width: 500px;
+  height: 600px;
+  overflow: hidden; /* Ensure no scroll bars appear on the card */
+  position: relative;
+  background: #000;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content vertically and horizontally */
+}
+
+/* Unique styles for each animation */
+.card.animation1 {
+  border: 2px solid #0f0; /* Neon green */
+}
+
+.card.animation1 .code-content {
+  color: #0f0; /* Neon green */
+  animation: code-fall-green 1s linear infinite;
+}
+
+.card.animation2 {
+  border: 2px solid #ff0; /* Neon yellow */
+}
+
+.card.animation2 .code-content {
+  color: #ff0; /* Neon yellow */
+  animation: code-fall-yellow 1s linear infinite;
+}
+
+.card.animation3 {
+  border: 2px solid #f00; /* Neon red */
+}
+
+.card.animation3 .code-content {
+  color: #f00; /* Neon red */
+  animation: code-fall-red 1s linear infinite;
+}
+
+.card.animation4 {
+  border: 2px solid #0ff; /* Neon cyan */
+}
+
+.card.animation4 .code-content {
+  color: #0ff; /* Neon cyan */
+  animation: code-fall-cyan 1s linear infinite;
+}
+
+.code-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the wrapper fills the card height */
+  width: 100%; /* Ensure the wrapper fills the card width */
+  overflow: hidden; /* Hide overflow to prevent scroll bars */
+}
+
+.code-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* Unique keyframes for each animation */
+@keyframes code-fall-green {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes code-fall-yellow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes code-fall-red {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes code-fall-cyan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.card p {
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.4;
 }
