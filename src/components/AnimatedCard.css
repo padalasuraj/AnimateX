@@ -1,38 +1,74 @@
+/* AnimatedCard.css */
 .animated-card {
+  position: relative;
   margin: 10px;
   width: 300px;
   height: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  background-color: #1e1e1e; /* Dark background for a professional look */
+  border-radius: 12px;
   overflow: hidden;
-  background-color: #000;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4); /* Softer green shadow */
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.animated-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.6); /* Enhanced shadow on hover */
+}
+
+.animated-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 0, 0.2) 0%,
+    /* More subtle green gradient */ rgba(0, 255, 0, 0) 60%
+  );
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.animated-card:hover::before {
+  opacity: 0.4; /* More subtle effect on hover */
 }
 
 .animation-container {
   width: 100%;
-  height: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .animation-frame {
   width: 100%;
   height: 100%;
   border: none;
+  overflow: hidden;
 }
 
 .code-container {
-  padding: 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
 }
 
 .copy-button {
-  padding: 10px 20px;
-  background-color: #444;
-  color: #fff;
-  border: none;
+  padding: 8px 16px;
+  background-color: #333; /* Darker button background for a professional look */
+  color: #0f0; /* Neon green text */
+  border: 1px solid #0f0; /* Neon green border */
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .copy-button:hover {
-  background-color: #666;
+  background-color: #0f0; /* Neon green background on hover */
+  color: #333; /* Dark text on hover */
 }

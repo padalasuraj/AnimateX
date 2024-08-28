@@ -1,92 +1,65 @@
-/* src/App.css */
+/* App.css */
 
-/* General App Styles */
 .App {
+  text-align: center;
+  background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #282c34;
-  color: #fff; /* Ensures text is visible against dark background */
-  font-family: Arial, sans-serif; /* Use a clean, modern font */
-}
-
-/* Header Styles */
-.NavHeader {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background-color: #333;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.NavHeader .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #00dbde;
-}
-
-.NavHeader .nav-links {
-  display: flex;
-  gap: 30px;
-}
-
-.NavHeader .nav-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.NavHeader .nav-links a:hover {
-  color: #00dbde;
-}
-
-/* Content Area */
-.content {
-  flex-grow: 1;
+  justify-content: center;
   padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  position: relative; /* Added for background overlay */
 }
 
-/* Cards Container */
+.App::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://www.transparenttextures.com/patterns/black-twill.png");
+  opacity: 0.05;
+  z-index: -1;
+  animation: backgroundShift 10s linear infinite; /* Animation for background texture */
+}
+
+@keyframes backgroundShift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
-  gap: 20px;
-  max-width: 1200px;
-  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
   padding: 20px;
-  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+  border-radius: 8px; /* Rounded corners */
 }
 
-/* Responsive design for medium screens */
-@media (max-width: 900px) {
-  .cards-container {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Two cards per row on medium screens */
-  }
+.card-wrapper {
+  perspective: 1000px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease; /* Added filter transition */
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-/* Responsive design for small screens */
-@media (max-width: 600px) {
-  .cards-container {
-    grid-template-columns: 1fr; /* One card per row on small screens */
-  }
+.card-wrapper:hover {
+  transform: scale(1.1) rotateY(15deg) rotateX(5deg);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4); /* Slightly larger shadow */
+  filter: brightness(1.1); /* Slight brightening */
 }
 
-/* Link Styles */
-.App-link {
-  color: #61dafb;
-}
-
-/* Logo Animation */
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-wrapper:active {
+  transform: scale(0.98) rotateY(0deg) rotateX(0deg);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }

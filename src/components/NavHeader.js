@@ -15,7 +15,10 @@ const NavHeader = () => {
           <a href="#events">Showcase</a>
           <a href="#faqs">Contact</a>
         </nav>
-        <a href="https://padalasuraj.netlify.app/" className="notes-button"></a>
+
+        <a href="https://padalasuraj.netlify.app/" className="author-button">
+          Developer
+        </a>
       </div>
     </header>
   );

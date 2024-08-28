@@ -13,13 +13,18 @@ function App() {
     "#00FFFF",
   ];
 
+  // Generate 90 cards
+  const cards = Array.from({ length: 90 }, (_, index) => ({
+    color: cardColors[index % cardColors.length],
+  }));
+
   return (
     <div className="App">
       <NavHeader />
       <div className="cards-container">
-        {cardColors.map((color, index) => (
+        {cards.map((card, index) => (
           <div key={index} className="card-wrapper">
-            <AnimatedCard color={color} />
+            <AnimatedCard color={card.color} />
           </div>
         ))}
       </div>
